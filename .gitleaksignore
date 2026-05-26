@@ -1,0 +1,3 @@
+# SHA-pinned ignores were retired 2026-04-28 in favor of path+regex allowlists in
+# .gitleaks.toml. This file is kept (empty) so any future genuine secret leak that
+# legitimately needs SHA-pinned suppression has an obvious place to land.
