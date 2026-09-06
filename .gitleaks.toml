@@ -27,3 +27,13 @@ id = "fathom-site-id-placeholder"
 description = "Block real Fathom site IDs committed to the repo; they belong in GitHub secrets."
 regex = '''(?i)fathom[_\-\s]?site[_\-]?id[^a-z0-9]{0,3}[A-Z]{7}\b'''
 tags = ["analytics", "fathom"]
+
+# Defense-in-depth (T-188, 2026-09-06): the default ruleset has no Cloudflare
+# user-API-token pattern. Replicated from ai-wiki (0d88008) where two plaintext
+# cfut_ tokens went unscanned. Additive; useDefault stays on. {40,} matches only
+# full 53-char values, sparing documented cfut_XXXX… truncated references.
+[[rules]]
+id = "cloudflare-user-api-token"
+description = "Cloudflare user API token (cfut_ prefix)"
+regex = '''\bcfut_[A-Za-z0-9]{40,}\b'''
+keywords = ["cfut_"]
